@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -160,5 +161,24 @@ class MemberRepositoryTest {
 			System.out.println("member = " + member);
 		}
 		
+	}
+	
+	@Test
+	public void returnType() {
+		Member m1 = new Member("AAA", 10);
+		Member m2 = new Member("BBB", 20);
+		memberRepository.save(m1);
+		memberRepository.save(m2);
+		
+		List<Member> findMemberList = memberRepository.findListByUsername("AAA");
+		for( Member member : findMemberList ) {
+			System.out.println("findMemberList = " + member);
+		}
+		
+		Member findMember = memberRepository.findMemberByUsername("AAA");
+		System.out.println("findMember = " + findMember);
+		
+		Optional<Member> findOptionalMember = memberRepository.findOptionByUsername("AAA");
+		System.out.println("findOptionalMember = " + findOptionalMember);
 	}
 }
